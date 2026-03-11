@@ -1,8 +1,21 @@
+VENV_PATH := .venv
+
+PYTHON := $(VENV_PATH)/bin/python
+PIP := $(VENV_PATH)/bin/pip
+REQUIREMENTS := requirements.txt
+
 SITE_DIR = site
 TERRAFORM_DIR = terraform
 
+venv:
+	@python3 -m venv $(VENV_PATH)
+
+install: venv
+	@$(PIP) install --disable-pip-version-check -q --upgrade pip
+	@$(PIP) install --disable-pip-version-check -q -r $(REQUIREMENTS)
+
 render:
-	.venv/bin/python scripts/render_event.py
+	@$(PYTHON) scripts/render_event.py
 
 run:
 	cd $(SITE_DIR) && npm run dev
