@@ -26,6 +26,12 @@ This template builds a static site for a virtual running event and deploys it to
 ## Build
 1. `make build`
 
+## Route Tools
+- `make route` generates `output/route.gpx` using `START_POINT` and `FINISH_POINT`.
+- `make stats` writes `output/summary.json` with total distance.
+- `make polyline` writes `output/polyline.json` for the map.
+- `make point` prints the coordinate and reverse-geocoded city at `DISTANCE`.
+
 ## Deploy
 1. `make deploy`
 
