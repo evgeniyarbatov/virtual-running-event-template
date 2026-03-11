@@ -1,72 +1,40 @@
-import { useEffect, useState } from "react";
+import Intro from './components/Intro';
+import Map from './components/Map';
+import Status from './components/Status';
+import Progress from './components/Progress';
+import Log from './components/Log';
 
-const App = () => {
-  const [event, setEvent] = useState(null);
-  const [error, setError] = useState("");
-
-  useEffect(() => {
-    fetch("/event.json")
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error("Failed to load event data");
-        }
-        return res.json();
-      })
-      .then((data) => setEvent(data))
-      .catch((err) => setError(err.message));
-  }, []);
-
-  if (error) {
-    return (
-      <div className="app">
-        <div className="container">
-          <div className="panel">{error}</div>
-        </div>
-      </div>
-    );
-  }
-
-  if (!event) {
-    return (
-      <div className="app">
-        <div className="container">
-          <div className="panel">Loading event data...</div>
-        </div>
-      </div>
-    );
-  }
-
+function App() {
   return (
     <div className="app">
-      <header className="hero">
-        <div className="container">
-          <div className="eyebrow">{event.country}</div>
-          <h1>{event.title}</h1>
-          <p className="subtitle">{event.subtitle}</p>
+      <section id="intro" className="snap-section min-vh-100 d-flex align-items-center justify-content-center bg-light">
+        <div style={{ width: '600px' }} className="text-justify">
+          <Intro />
         </div>
-      </header>
-      <main className="content">
-        <div className="container">
-          <section className="panel">
-            <h2>About the event</h2>
-            {event.custom_texts.map((text, index) => (
-              <p key={index}>{text}</p>
-            ))}
-          </section>
-          <section className="panel points">
-            <div>
-              <h3>Start</h3>
-              <p>{event.start_point}</p>
-            </div>
-            <div>
-              <h3>Finish</h3>
-              <p>{event.stop_point}</p>
-            </div>
-          </section>
+      </section>
+      <section id="map" className="snap-section min-vh-100">
+        <div style={{ height: '100%', width: '100%' }}>
+          <Map />
         </div>
-      </main>
+      </section>
+      <section id="status" className="snap-section min-vh-100 d-flex align-items-center justify-content-center bg-light">
+        <div style={{ width: '600px' }} className="text-justify">
+          <Status />
+        </div>
+      </section>
+      <section id="status" className="snap-section min-vh-100 d-flex align-items-center justify-content-center bg-light">
+        <div style={{ width: '600px' }} className="text-justify">
+          <Progress />
+        </div>
+      </section>
+      <section id="log" className="snap-section min-vh-100 d-flex align-items-center justify-content-center bg-light">
+        <div style={{ width: '600px' }} className="text-justify">
+          <Log />
+        </div>
+      </section>
+
     </div>
   );
-};
+}
 
 export default App;

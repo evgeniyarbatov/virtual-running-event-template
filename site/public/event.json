@@ -4,7 +4,7 @@
   "subtitle": "420 km - 12 weeks - One runner",
   "custom_texts": [
     "Replace this text with your event story.",
-    "Update the start and finish points in terraform.tfvars.json."
+    "Update the start and finish points in config.json."
   ],
   "start_point": "North Point",
   "stop_point": "South Point"

@@ -1,5 +1,5 @@
 provider "aws" {
-  region = var.aws_region
+  region = local.config.aws_region
 }
 
 data "aws_region" "current" {}
