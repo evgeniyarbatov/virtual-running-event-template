@@ -1,0 +1,14 @@
+{
+  "aws_region": "us-east-1",
+  "s3_bucket": "virtual-running-event-template",
+  "s3_bucket_dir": "../site/dist",
+  "event_country": "Exampleland",
+  "event_title": "Exampleland Virtual Ultra",
+  "event_subtitle": "420 km - 12 weeks - One runner",
+  "event_custom_texts": [
+    "Replace this text with your event story.",
+    "Update the start and finish points in config.json."
+  ],
+  "event_start_point": "North Point",
+  "event_stop_point": "South Point"
+}

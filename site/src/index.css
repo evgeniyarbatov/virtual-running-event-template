@@ -1,0 +1,86 @@
+:root {
+  --bg: #f5f1e8;
+  --ink: #1a1a1a;
+  --muted: #5c5a57;
+  --accent: #d96c45;
+  --panel: #ffffff;
+  --shadow: rgba(20, 16, 12, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Space Grotesk", "Trebuchet MS", sans-serif;
+  color: var(--ink);
+  background: radial-gradient(circle at top, #fff8ee 0%, var(--bg) 55%);
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Fraunces", "Georgia", serif;
+  margin: 0 0 0.6rem 0;
+}
+
+p {
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  width: min(960px, 100%);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.hero {
+  padding: 5.5rem 0 3.5rem;
+  background: linear-gradient(135deg, #f8efe2 0%, #fff7ed 100%);
+  border-bottom: 1px solid rgba(20, 16, 12, 0.08);
+}
+
+.eyebrow {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: var(--muted);
+  max-width: 600px;
+}
+
+.content {
+  padding: 3rem 0 4.5rem;
+}
+
+.panel {
+  background: var(--panel);
+  padding: 2rem;
+  border-radius: 18px;
+  box-shadow: 0 12px 30px var(--shadow);
+  margin-bottom: 2rem;
+}
+
+.points {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.points p {
+  font-size: 1.05rem;
+  color: var(--ink);
+}
