@@ -1,5 +1,5 @@
 output "url" {
-  value = "https://${local.config.s3_bucket}"
+  value = "https://${var.s3_bucket}"
 }
 
 output "public_url" {

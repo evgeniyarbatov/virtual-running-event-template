@@ -1,5 +1,4 @@
 locals {
-  config = jsondecode(file("${path.module}/../config.json"))
   content_types = {
     ".html" : "text/html",
     ".css" : "text/css",
