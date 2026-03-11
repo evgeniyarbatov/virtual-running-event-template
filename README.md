@@ -10,9 +10,8 @@ This template builds a static site for a virtual running event and deploys it to
 - AWS credentials with access to S3
 
 ## Setup
-1. Create and activate a virtual environment:
-   `python3 -m venv .venv`
-   `./.venv/bin/pip install -r requirements.txt`
+1. Create the virtual environment and install Python dependencies:
+   `make install`
 2. Update `config.json`:
    set `aws_region`, `s3_bucket`, and the `event_*` values.
 3. Generate event JSON:
@@ -31,6 +30,11 @@ This template builds a static site for a virtual running event and deploys it to
 - `make stats` writes `output/summary.json` with total distance.
 - `make polyline` writes `output/polyline.json` for the map.
 - `make point` prints the coordinate and reverse-geocoded city at `DISTANCE`.
+
+## Update Progress
+1. Ensure `output/route.gpx` exists.
+2. Update `site/public/log.json` with new runs.
+3. `make update`
 
 ## Deploy
 1. `make deploy`

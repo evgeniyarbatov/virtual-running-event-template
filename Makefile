@@ -26,6 +26,9 @@ install: venv
 render:
 	@$(PYTHON) scripts/render_event.py
 
+update:
+	@$(PYTHON) scripts/update.py
+
 route:
 	@mkdir -p output
 	@$(PYTHON) scripts/route.py \
@@ -60,4 +63,4 @@ deploy:
 	cd $(SITE_DIR) && npm run build
 	cd $(TERRAFORM_DIR) && terraform apply -auto-approve
 
-.PHONY: render run build deploy route stats polyline point
+.PHONY: render update run build deploy route stats polyline point
