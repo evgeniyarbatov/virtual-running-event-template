@@ -1,7 +1,4 @@
 {
-  "aws_region": "us-east-1",
-  "s3_bucket": "virtual-running-event-template",
-  "s3_bucket_dir": "../site/dist",
   "event_country": "Exampleland",
   "event_title": "Exampleland Virtual Ultra",
   "event_subtitle": "420 km - 12 weeks - One runner",
