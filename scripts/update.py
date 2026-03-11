@@ -6,6 +6,7 @@ import sys
 import os
 import subprocess
 from decimal import Decimal, ROUND_HALF_UP
+from pathlib import Path
 
 
 def calculate_total_distance(log_file):
@@ -21,10 +22,8 @@ def calculate_total_distance(log_file):
     return total.quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
 
 
-def update_makefile(distance):
+def update_makefile(makefile_path, distance):
     """Update DISTANCE in Makefile"""
-    makefile_path = "Makefile"
-
     with open(makefile_path, "r") as f:
         content = f.read()
 
@@ -38,15 +37,16 @@ def update_makefile(distance):
     print(f"Updated Makefile: DISTANCE = {distance}")
 
 
-def run_make_point():
-    """Run 'make point' and capture output"""
+def run_point(script_path, route_gpx, distance, cwd):
+    """Run scripts/get_point.py and capture output"""
     try:
         result = subprocess.run(
-            ["make", "point"],
+            [sys.executable, str(script_path), str(route_gpx), str(distance)],
             capture_output=True,
             text=True,
             check=True,
             shell=False,
+            cwd=cwd,
         )
 
         lines = result.stdout.strip().split("\n")
@@ -60,15 +60,9 @@ def run_make_point():
         return lat, lon, city
 
     except subprocess.CalledProcessError as e:
-        print(f"Error running 'make point': {e}")
+        print(f"Error running scripts/get_point.py: {e}")
         print(f"stdout: {e.stdout}")
         print(f"stderr: {e.stderr}")
-
-        print(f"\nDebugging info:")
-        debug_result = subprocess.run(
-            ["make", "-n", "point"], capture_output=True, text=True
-        )
-        print(f"Make dry run: {debug_result.stdout}")
         sys.exit(1)
 
 
@@ -108,9 +102,13 @@ def update_metadata_json(city, distance):
 
 
 def main():
-    log_file = "site/public/log.json"
+    repo_root = Path(__file__).resolve().parents[1]
+    log_file = repo_root / "site/public/log.json"
+    route_gpx = repo_root / "output/route.gpx"
+    makefile_path = repo_root / "Makefile"
+    point_script = repo_root / "scripts/get_point.py"
 
-    if not os.path.exists(log_file):
+    if not log_file.exists():
         print(f"Error: {log_file} not found")
         sys.exit(1)
 
@@ -119,10 +117,10 @@ def main():
     print(f"Total distance: {total_distance} km")
 
     print("\nUpdating Makefile...")
-    update_makefile(total_distance)
+    update_makefile(makefile_path, total_distance)
 
-    print("\nRunning 'make point' to get current coordinates...")
-    lat, lon, city = run_make_point()
+    print("\nRunning scripts/get_point.py to get current coordinates...")
+    lat, lon, city = run_point(point_script, route_gpx, total_distance, repo_root)
     print(f"Current position: ({lat}, {lon}) - {city}")
 
     print("\nUpdating site/public/map.json...")
