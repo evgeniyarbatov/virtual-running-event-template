@@ -1,6 +1,6 @@
 # Virtual Running Event Template
 
-This template builds a static site for a virtual running event and deploys it to S3 with Terraform. Event fields (country, custom texts, start and stop points) are defined in Terraform variables and rendered into `site/public/event.json`.
+This template builds a static site for a virtual running event and deploys it to S3 with Terraform. Event fields and deployment settings live in `config.json` and are rendered into `site/public/event.json`.
 
 ## Requirements
 - Node.js 18+
@@ -13,8 +13,8 @@ This template builds a static site for a virtual running event and deploys it to
 1. Create and activate a virtual environment:
    `python3 -m venv .venv`
    `./.venv/bin/pip install -r requirements.txt`
-2. Update `terraform/terraform.tfvars.json`:
-   set `s3_bucket`, `aws_region`, and the `event_*` values.
+2. Update `config.json`:
+   set `aws_region`, `s3_bucket`, and the `event_*` values.
 3. Generate event JSON:
    `make render`
 4. Install frontend dependencies:
