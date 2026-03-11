@@ -26,6 +26,14 @@ Event fields live in `config.json`. Terraform deployment defaults live in `terra
 ## Run Locally
 1. `make run`
 
+## First-Time Route Setup
+1. Set `START_POINT` and `FINISH_POINT` in `Makefile`.
+2. `make route`
+3. `make polyline`
+4. `make stats`
+5. Update `config.json` using the outputs:
+   add `event_polyline` from `output/polyline.json` and update the `event_*` values based on `output/summary.json`.
+
 ## Route Tools
 - `make route` generates `output/route.gpx` using `START_POINT` and `FINISH_POINT`.
 - `make stats` writes `output/summary.json` with total distance.
