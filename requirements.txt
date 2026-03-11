@@ -1,1 +1,5 @@
-# No external Python dependencies.
+gpxpy
+pandas
+requests
+polyline
+geopy
