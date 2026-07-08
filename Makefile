@@ -17,11 +17,10 @@ POLYLINE_JSON = output/polyline.json
 DISTANCE = 0.00
 
 venv:
-	@python3 -m venv $(VENV_PATH)
+	@uv venv $(VENV_PATH)
 
 install: venv
-	@$(PIP) install --disable-pip-version-check -q --upgrade pip
-	@$(PIP) install --disable-pip-version-check -q -r $(REQUIREMENTS)
+	@uv pip install -q -r $(REQUIREMENTS)
 
 render:
 	@$(PYTHON) scripts/render_event.py
