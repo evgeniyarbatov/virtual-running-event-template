@@ -22,34 +22,28 @@ venv:
 install: venv
 	@uv pip install -q -r $(REQUIREMENTS)
 
-render:
+render: install
 	@$(PYTHON) scripts/render_event.py
-
-update:
+update: install
 	@$(PYTHON) scripts/update.py
-
-route:
+route: install
 	@mkdir -p output
 	@$(PYTHON) scripts/route.py \
 	$(START_POINT) \
 	$(FINISH_POINT) \
 	$(ROUTE_GPX)
-
-stats:
+stats: install
 	@$(PYTHON) scripts/stats.py \
 	$(ROUTE_GPX) \
 	$(SUMMARY_JSON)
-
-polyline:
+polyline: install
 	@$(PYTHON) scripts/get_polyline.py \
 	$(ROUTE_GPX) \
 	$(POLYLINE_JSON)
-
-point:
+point: install
 	@$(PYTHON) scripts/get_point.py \
 	$(ROUTE_GPX) \
 	$(DISTANCE)
-
 run:
 	cd $(SITE_DIR) && npm run dev
 
