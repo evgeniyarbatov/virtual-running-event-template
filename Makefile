@@ -1,8 +1,4 @@
-VENV_PATH := .venv
-
-PYTHON := $(VENV_PATH)/bin/python
-PIP := $(VENV_PATH)/bin/pip
-REQUIREMENTS := requirements.txt
+# Uses uv (https://docs.astral.sh/uv) for dependency management — uv sync creates/updates .venv; run commands via uv run, no manual activation.
 
 SITE_DIR = site
 TERRAFORM_DIR = terraform
@@ -16,34 +12,37 @@ POLYLINE_JSON = output/polyline.json
 
 DISTANCE = 0.00
 
-venv:
-	@uv venv $(VENV_PATH)
-
-install: venv
-	@uv pip install -q -r $(REQUIREMENTS)
+install:
+	@uv sync
 
 render: install
-	@$(PYTHON) scripts/render_event.py
+	@uv run python scripts/render_event.py
+
 update: install
-	@$(PYTHON) scripts/update.py
+	@uv run python scripts/update.py
+
 route: install
 	@mkdir -p output
-	@$(PYTHON) scripts/route.py \
+	@uv run python scripts/route.py \
 	$(START_POINT) \
 	$(FINISH_POINT) \
 	$(ROUTE_GPX)
+
 stats: install
-	@$(PYTHON) scripts/stats.py \
+	@uv run python scripts/stats.py \
 	$(ROUTE_GPX) \
 	$(SUMMARY_JSON)
+
 polyline: install
-	@$(PYTHON) scripts/get_polyline.py \
+	@uv run python scripts/get_polyline.py \
 	$(ROUTE_GPX) \
 	$(POLYLINE_JSON)
+
 point: install
-	@$(PYTHON) scripts/get_point.py \
+	@uv run python scripts/get_point.py \
 	$(ROUTE_GPX) \
 	$(DISTANCE)
+
 run:
 	cd $(SITE_DIR) && npm run dev
 
@@ -56,4 +55,20 @@ deploy:
 	cd $(SITE_DIR) && npm run build
 	cd $(TERRAFORM_DIR) && terraform apply -auto-approve
 
-.PHONY: render update run build deploy route stats polyline point
+lock:
+	@uv lock
+
+help:
+	@echo "install  - uv sync"
+	@echo "render   - render event site data"
+	@echo "update   - update event data"
+	@echo "route    - generate route GPX"
+	@echo "stats    - compute route stats"
+	@echo "polyline - extract route polyline"
+	@echo "point    - get point at distance along route"
+	@echo "run      - run site dev server"
+	@echo "build    - render and build site"
+	@echo "deploy   - render, build, and apply terraform"
+	@echo "lock     - uv lock"
+
+.PHONY: install render update run build deploy route stats polyline point lock help
