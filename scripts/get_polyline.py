@@ -1,11 +1,12 @@
-import sys
 import json
+import sys
+
 import gpxpy
 import polyline
 
 
 def gpx_to_polyline(gpx_file_path):
-    with open(gpx_file_path, "r") as gpx_file:
+    with open(gpx_file_path) as gpx_file:
         gpx = gpxpy.parse(gpx_file)
 
     coordinates = []

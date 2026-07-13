@@ -2,16 +2,15 @@
 
 import json
 import re
-import sys
-import os
 import subprocess
-from decimal import Decimal, ROUND_HALF_UP
+import sys
+from decimal import ROUND_HALF_UP, Decimal
 from pathlib import Path
 
 
 def calculate_total_distance(log_file):
     """Calculate total distance from log.json entries"""
-    with open(log_file, "r") as f:
+    with open(log_file) as f:
         entries = json.load(f)
 
     total = Decimal("0")
@@ -24,7 +23,7 @@ def calculate_total_distance(log_file):
 
 def update_makefile(makefile_path, distance):
     """Update DISTANCE in Makefile"""
-    with open(makefile_path, "r") as f:
+    with open(makefile_path) as f:
         content = f.read()
 
     updated_content = re.sub(
@@ -70,7 +69,7 @@ def update_map_json(lat, lon):
     """Update current_location in map.json only"""
     map_file = "site/public/map.json"
 
-    with open(map_file, "r") as f:
+    with open(map_file) as f:
         map_data = json.load(f)
 
     map_data["current_location"] = [lat, lon]
@@ -85,7 +84,7 @@ def update_metadata_json(city, distance):
     """Update metadata.json with current point and distance"""
     metadata_file = "site/public/metadata.json"
 
-    with open(metadata_file, "r") as f:
+    with open(metadata_file) as f:
         metadata = json.load(f)
 
     if city == "Unknown":

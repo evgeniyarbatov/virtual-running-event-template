@@ -1,12 +1,12 @@
-import sys
 import json
-import gpxpy
+import sys
 
+import gpxpy
 from geopy.distance import geodesic
 
 
 def calculate_total_distance(gpx_file_path):
-    with open(gpx_file_path, "r") as gpx_file:
+    with open(gpx_file_path) as gpx_file:
         gpx = gpxpy.parse(gpx_file)
 
     coords = []

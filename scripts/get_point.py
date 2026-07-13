@@ -1,8 +1,8 @@
 import sys
-import gpxpy
 
-from geopy.geocoders import Nominatim
+import gpxpy
 from geopy.distance import geodesic
+from geopy.geocoders import Nominatim
 
 
 def compute_distance(p1, p2):
@@ -10,7 +10,7 @@ def compute_distance(p1, p2):
 
 
 def get_point(gpx_file_path, distance):
-    with open(gpx_file_path, "r") as gpx_file:
+    with open(gpx_file_path) as gpx_file:
         gpx = gpxpy.parse(gpx_file)
 
     point = None

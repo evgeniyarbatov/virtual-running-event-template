@@ -1,9 +1,9 @@
 import sys
-import requests
-import polyline
-import gpxpy
 
+import gpxpy
 import pandas as pd
+import polyline
+import requests
 
 OSRM_ROUTE_URL = "https://router.project-osrm.org/route/v1/driving/"
 OSRM_NEAREST_URL = "https://router.project-osrm.org/nearest/v1/driving/"
@@ -24,10 +24,7 @@ def get_nearest(coords):
         data = response.json()
         nearest = data["waypoints"][0]["location"]  # [lon, lat]
         return (nearest[1], nearest[0])
-    else:
-        raise Exception(
-            f"Error from OSRM server: {response.status_code} - {response.text}"
-        )
+    raise Exception(f"Error from OSRM server: {response.status_code} - {response.text}")
 
 
 def get_route(start_str, stop_str):
