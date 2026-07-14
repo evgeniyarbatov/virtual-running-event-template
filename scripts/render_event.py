@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 
 
-def main():
+def main() -> None:
     repo_root = Path(__file__).resolve().parents[1]
     config_path = repo_root / "config.json"
     output_path = repo_root / "site" / "public" / "event.json"

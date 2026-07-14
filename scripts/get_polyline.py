@@ -5,7 +5,7 @@ import gpxpy
 import polyline
 
 
-def gpx_to_polyline(gpx_file_path):
+def gpx_to_polyline(gpx_file_path: str) -> dict[str, str]:
     with open(gpx_file_path) as gpx_file:
         gpx = gpxpy.parse(gpx_file)
 
@@ -21,15 +21,15 @@ def gpx_to_polyline(gpx_file_path):
     return {"polyline": encoded}
 
 
-def save_to_json(data, output_path):
+def save_to_json(data: dict[str, str], output_path: str) -> None:
     with open(output_path, "w") as json_file:
         json.dump(data, json_file, indent=2)
 
 
 def main(
-    route_gpx,
-    polyline_json,
-):
+    route_gpx: str,
+    polyline_json: str,
+) -> None:
     result = gpx_to_polyline(route_gpx)
     save_to_json(result, polyline_json)
 

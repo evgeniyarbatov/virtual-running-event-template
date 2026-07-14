@@ -5,7 +5,7 @@ import gpxpy
 from geopy.distance import geodesic
 
 
-def calculate_total_distance(gpx_file_path):
+def calculate_total_distance(gpx_file_path: str) -> dict[str, float]:
     with open(gpx_file_path) as gpx_file:
         gpx = gpxpy.parse(gpx_file)
 
@@ -28,15 +28,15 @@ def calculate_total_distance(gpx_file_path):
     }
 
 
-def save_to_json(data, output_path):
+def save_to_json(data: dict[str, float], output_path: str) -> None:
     with open(output_path, "w") as json_file:
         json.dump(data, json_file, indent=2)
 
 
 def main(
-    route_gpx,
-    sumary_json,
-):
+    route_gpx: str,
+    sumary_json: str,
+) -> None:
     distance_data = calculate_total_distance(route_gpx)
     save_to_json(distance_data, sumary_json)
 
