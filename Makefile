@@ -15,6 +15,9 @@ DISTANCE = 0.00
 install:
 	@uv sync
 
+test: install
+	@uv run python -m unittest discover -s tests -p 'test_*.py' -v
+
 render: install
 	@uv run python scripts/render_event.py
 
@@ -60,6 +63,7 @@ lock:
 
 help:
 	@echo "install  - uv sync"
+	@echo "test     - run unit tests"
 	@echo "render   - render event site data"
 	@echo "update   - update event data"
 	@echo "route    - generate route GPX"
@@ -71,4 +75,4 @@ help:
 	@echo "deploy   - render, build, and apply terraform"
 	@echo "lock     - uv lock"
 
-.PHONY: install render update run build deploy route stats polyline point lock help
+.PHONY: install test render update run build deploy route stats polyline point lock help
