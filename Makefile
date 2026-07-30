@@ -46,6 +46,7 @@ point: install
 	$(ROUTE_GPX) \
 	$(DISTANCE)
 
+# Entry point: run the site locally.
 run:
 	cd $(SITE_DIR) && npm run dev
 
