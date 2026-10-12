@@ -8,7 +8,7 @@ Event fields live in `config.json`. Terraform deployment defaults live in `terra
 
 | Folder | Status | Last touched | Next step |
 |---|---|---|---|
-| root | parked | 2026-07-30 | Add CI to run the existing tests on push, then backport to the instances derived from this template |
+| root | parked | 2026-03-11 | Add CI to run the existing tests on push, then backport to the instances derived from this template |
 
 ## Requirements
 - Node.js 18+
