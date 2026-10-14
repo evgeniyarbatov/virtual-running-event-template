@@ -22,7 +22,7 @@ Builds a static React site and deploys it to S3 via Terraform.
 make run
 ```
 
-Runs the site's Vite dev server. Full setup (first time): `make install`,
+Runs the site's Vite dev server. Full setup (first time): `make setup`,
 edit `terraform/variables.tf` and `config.json`, `make render`,
 `cd site && npm install`, then `make run`. See README for the full
 route-setup and deploy workflow (`make route`, `make update`, `make deploy`).

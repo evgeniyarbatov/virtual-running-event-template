@@ -12,36 +12,38 @@ POLYLINE_JSON = output/polyline.json
 
 DISTANCE = 0.00
 
-install:
+.DEFAULT_GOAL := help
+
+setup:
 	@uv sync
 
-test: install
+test: setup
 	@uv run python -m unittest discover -s tests -p 'test_*.py' -v
 
-render: install
+render: setup
 	@uv run python scripts/render_event.py
 
-update: install
+update: setup
 	@uv run python scripts/update.py
 
-route: install
+route: setup
 	@mkdir -p output
 	@uv run python scripts/route.py \
 	$(START_POINT) \
 	$(FINISH_POINT) \
 	$(ROUTE_GPX)
 
-stats: install
+stats: setup
 	@uv run python scripts/stats.py \
 	$(ROUTE_GPX) \
 	$(SUMMARY_JSON)
 
-polyline: install
+polyline: setup
 	@uv run python scripts/get_polyline.py \
 	$(ROUTE_GPX) \
 	$(POLYLINE_JSON)
 
-point: install
+point: setup
 	@uv run python scripts/get_point.py \
 	$(ROUTE_GPX) \
 	$(DISTANCE)
@@ -63,7 +65,7 @@ lock:
 	@uv lock
 
 help:
-	@echo "install  - uv sync"
+	@echo "setup    - uv sync"
 	@echo "test     - run unit tests"
 	@echo "render   - render event site data"
 	@echo "update   - update event data"
@@ -76,4 +78,4 @@ help:
 	@echo "deploy   - render, build, and apply terraform"
 	@echo "lock     - uv lock"
 
-.PHONY: install test render update run build deploy route stats polyline point lock help
+.PHONY: setup test render update run build deploy route stats polyline point lock help

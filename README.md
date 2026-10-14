@@ -13,7 +13,7 @@ Event fields live in `config.json`. Terraform deployment defaults live in `terra
 
 ## Setup
 1. Create the virtual environment and install Python dependencies:
-   `make install`
+   `make setup`
 2. Update `terraform/variables.tf`:
    set `aws_region`, `s3_bucket`, and `s3_bucket_dir`.
 3. Update `config.json`:
